@@ -1,0 +1,17 @@
+{
+  "name": "coba-hapi",
+  "version": "0.1.0",
+  "description": "Cobain hapi.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rizki Ardian",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^16.6.2",
+    "inert": "^4.2.1",
+    "mysql": "^2.14.1",
+    "socket.io": "^2.0.3"
+  }
+}

@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>Hapi + Socket.io</title>
+</head>
+<body>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io('http://localhost:9000')
+		socket.on('test', function (data) {
+			console.log(data)
+			var el = document.createElement('h2')
+			el.innerText = data.message
+			document.body.prepend(el)
+			socket.emit('reply', { message: 'Yay!' })
+		})
+	</script>
+</body>
+</html>
