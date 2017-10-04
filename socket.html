@@ -3,15 +3,18 @@
 	<title>Hapi + Socket.io</title>
 </head>
 <body>
+	<h2 id="visits"></h2>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
-		var socket = io('http://localhost:9000')
-		socket.on('test', function (data) {
-			console.log(data)
-			var el = document.createElement('h2')
-			el.innerText = data.message
-			document.body.prepend(el)
-			socket.emit('reply', { message: 'Yay!' })
+		document.addEventListener('DOMContentLoaded', function (e) {
+			var socket = io('http://localhost:9000')
+			var el = document.getElementById('visits')
+
+			socket.on('visited', function (data) {
+				el.innerText = data.visits + ' visits so far'
+			})
+
+			socket.emit('visit')
 		})
 	</script>
 </body>
