@@ -7,7 +7,7 @@ module.exports = (server) => {
 		server.route({
 			method: 'GET',
 			path: '/',
-			handler: (request, reply) => reply.file('./views/index.html')
+			handler: (request, reply) => reply.file(__dirname + '/views/index.html')
 		})
 
 		server.route({
@@ -26,7 +26,7 @@ module.exports = (server) => {
 		server.route({
 			method: 'GET',
 			path: '/socket',
-			handler: (request, reply) => reply.file('./views/socket.html')
+			handler: (request, reply) => reply.file(__dirname + '/views/socket.html')
 		})
 
 		server.start((err) => {
