@@ -1,4 +1,4 @@
-module.exports = function (io) {
+module.exports = (io) => {
 	let visits = 0
 
 	io.on('connection', (socket) => {

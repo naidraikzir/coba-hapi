@@ -1,14 +1,13 @@
-const db = require('./db')()
-db.connect()
+const db = require('./models')
 
-module.exports = function (server) {
+module.exports = (server) => {
 	return server.register(require('inert'), (err) => {
 		if (err) throw err
 
 		server.route({
 			method: 'GET',
 			path: '/',
-			handler: (request, reply) => reply.file('index.html')
+			handler: (request, reply) => reply.file('./views/index.html')
 		})
 
 		server.route({
@@ -19,11 +18,7 @@ module.exports = function (server) {
 				if (user !== 'undefined') {
 					reply(`Hello ${user}!`)
 				} else {
-					db.query('SELECT * FROM users', (err, rows, query) => {
-						if (err) throw err
-						rows = rows.map((row) => `Hello ${row.name}`)
-						reply(rows)
-					})
+					reply(db.User.all())
 				}
 			}	
 		})
@@ -31,7 +26,7 @@ module.exports = function (server) {
 		server.route({
 			method: 'GET',
 			path: '/socket',
-			handler: (request, reply) => reply.file('socket.html')
+			handler: (request, reply) => reply.file('./views/socket.html')
 		})
 
 		server.start((err) => {
