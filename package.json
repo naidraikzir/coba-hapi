@@ -9,6 +9,7 @@
   "author": "Rizki Ardian",
   "license": "MIT",
   "dependencies": {
+    "callsite": "^1.0.0",
     "dotenv": "^4.0.0",
     "hapi": "^16.6.2",
     "inert": "^4.2.1",

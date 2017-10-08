@@ -1,4 +1,7 @@
-const users = require('./users')
+const fs = require('fs')
+const path = require('path')
+const basename = path.basename(module.filename)
+const routes = require('../utils/list-all')()
 
 module.exports = (server) => {
 	return server.register(require('inert'), (err) => {
@@ -7,12 +10,14 @@ module.exports = (server) => {
 		server.route({
 			method: 'GET',
 			path: '/',
-			handler: (request, reply) => reply.file(
-				__dirname + '/../views/index.html'
-			)
+			handler: (request, reply) => reply('Hello Badass!')
 		})
 
-		users(server)
+		server.route({
+			method: 'POST',
+			path: '/',
+			handler: (request, reply) => reply(request.payload)
+		})
 
 		server.route({
 			method: 'GET',
@@ -21,6 +26,11 @@ module.exports = (server) => {
 				__dirname + '/../views/socket.html'
 			)
 		})
+
+		// add all file based routes in routes dir
+		for (let route of routes) {
+			require(`./${route}`)(server)
+		}
 
 		server.start((err) => {
 			if (err) throw err

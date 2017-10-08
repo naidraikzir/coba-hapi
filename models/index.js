@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
-const basename = path.basename(module.filename)
+const models = require('../utils/list-all')()
 const env = process.env.NODE_ENV || 'development'
 const config = require('../config/config')[env]
 const db = {}
@@ -20,13 +20,7 @@ if (config.use_env_variable) {
 	)
 }
 
-fs
-	.readdirSync(__dirname)
-	.filter((file) => {
-		return (file.indexOf('.') !== 0) &&	// except hidden files
-			(file !== basename) &&						// except this file
-			(file.slice(-3) === '.js')				// js files
-	})
+models
 	.map((file) => {
 		let model = sequelize['import'](path.join(__dirname, file))
 		db[model.name] = model
