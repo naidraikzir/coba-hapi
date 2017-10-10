@@ -21,15 +21,8 @@ if (config.use_env_variable) {
 
 models
   .map((file) => {
-    let model = sequelize['import'](path.join(__dirname, file))
+    let model = sequelize.import(path.join(__dirname, file))
     db[model.name] = model
-  })
-
-Object.keys(db)
-  .map((modelName) => {
-    if (db[modelName].associate) {
-      db[modelName].associate(db)
-    }
   })
 
 db.sequelize = sequelize

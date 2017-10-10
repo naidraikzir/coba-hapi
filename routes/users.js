@@ -2,7 +2,7 @@ const Boom = require('boom')
 const db = require('../models')
 
 module.exports = (server) => {
-  return server.route({
+  server.route({
     method: 'GET',
     path: '/users/{user?}',
     handler: (request, reply) => {
