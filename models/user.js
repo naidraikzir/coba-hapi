@@ -6,11 +6,6 @@ module.exports = (sequelize, DataTypes) => {
 		email: DataTypes.STRING
   }, {
 		tableName: 'users',
-    classMethods: {
-      associate: (models) => {
-        // associations can be defined here
-      }
-    }
   })
   return User
 }

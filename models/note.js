@@ -6,11 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT
   }, {
 		tableName: 'notes',
-    classMethods: {
-      associate: (models) => {
-        // associations can be defined here
-      }
-    }
   })
   return Note
 }
