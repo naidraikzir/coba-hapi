@@ -1,21 +1,21 @@
 <html>
 <head>
-	<title>Hapi + Socket.io</title>
+    <title>Hapi + Socket.io</title>
 </head>
 <body>
-	<h2 id="visits"></h2>
-	<script src="/socket.io/socket.io.js"></script>
-	<script>
-		document.addEventListener('DOMContentLoaded', function (e) {
-			var socket = io('http://localhost:9000')
-			var el = document.getElementById('visits')
+    <h2 id="visits"></h2>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function (e) {
+            var socket = io('http://localhost:9000')
+            var el = document.getElementById('visits')
 
-			socket.on('visited', function (data) {
-				el.innerText = data.visits + ' visits so far'
-			})
+            socket.on('visited', function (data) {
+                el.innerText = data.visits + ' visits so far'
+            })
 
-			socket.emit('visit')
-		})
-	</script>
+            socket.emit('visit')
+        })
+    </script>
 </body>
 </html>

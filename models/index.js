@@ -1,6 +1,5 @@
 'use strict'
 
-const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
 const models = require('../utils/list-all')()
@@ -10,28 +9,28 @@ const db = {}
 let sequelize
 
 if (config.use_env_variable) {
-	sequelize = new Sequelize(process.env[config.use_env_variable])
+  sequelize = new Sequelize(process.env[config.use_env_variable])
 } else {
-	sequelize = new Sequelize(
-		config.database,
-		config.username,
-		config.password,
-		config
-	)
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  )
 }
 
 models
-	.map((file) => {
-		let model = sequelize['import'](path.join(__dirname, file))
-		db[model.name] = model
-	})
+  .map((file) => {
+    let model = sequelize['import'](path.join(__dirname, file))
+    db[model.name] = model
+  })
 
 Object.keys(db)
-	.map((modelName) => {
-		if (db[modelName].associate) {
-			db[modelName].associate(db)
-		}
-	})
+  .map((modelName) => {
+    if (db[modelName].associate) {
+      db[modelName].associate(db)
+    }
+  })
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize
